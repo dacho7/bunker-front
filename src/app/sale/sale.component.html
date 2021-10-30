@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="grey darken-3 center-align title">
+    <h2 class="white-text">Registrar Ventas</h2>
+  </div>
+
+  <div class="container">
+    <form action="post">
+      <div class="row">
+        <div class="col s12">
+          <h6>Ingrese Nombre Del Cliente (Nombre Real, No Apodos!) <span class="oblig">*</span> </h6>
+          <input type="text" name="name" placeholder="Ingrese Nombre" [(ngModel)]="name">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <h6>Ingrese Producto <span class="oblig">*</span></h6>
+          <input type="text" name="product" placeholder="Producto" [(ngModel)]="product">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <h6>Ingrese Cantidad <span class="oblig">*</span></h6>
+          <input type="text" name="quantity" placeholder="Cantidad" [(ngModel)]="quantity">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <h6>Ingrese Dirección de Domicilio</h6>
+          <input type="text" name="address" placeholder="Dirección" [(ngModel)]="address">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <h6>Ingrese Celular del Cliente</h6>
+          <input type="text" name="phone" placeholder="Celular" [(ngModel)]="phone">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <h6>Ingrese Email del Cliente</h6>
+          <input type="text" name="email" placeholder="Email" [(ngModel)]="email">
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col s12 center-align">
+        <button class="btn btnblock waves-effect waves-red btn-large" (click)="registerSale()">Registra Venta</button>
+      </div>
+    </div>
+  </div>
+</div>
