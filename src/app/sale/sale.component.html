@@ -47,7 +47,7 @@
   <div class="container">
     <div class="row">
       <div class="col s12 center-align">
-        <button class="btn btnblock waves-effect waves-red btn-large" (click)="registerSale()">Registra Venta</button>
+        <button class="btn btnblock waves-effect waves-red btn-large" (click)="registerSale()" [disabled]="!name || !product || !quantity">Registra Venta</button>
       </div>
     </div>
   </div>

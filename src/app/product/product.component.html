@@ -8,25 +8,31 @@
       <div class="row">
         <div class="col s12">
           <h6>Ingrese Descripción del producto</h6>
-          <input type="text" name="name" placeholder="Ingrese Nombre" [(ngModel)]="description">
+          <input type="text" name="description" placeholder="Ingrese Descripción" [(ngModel)]="description">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <h6>Ingrese Caracteristicas del producto</h6>
+          <input type="text" name="supplies" placeholder="Ej, 200 g de carne + papas a la francesa + lechuga" [(ngModel)]="supplies">
         </div>
       </div>
       <div class="row">
         <div class="col s12">
           <h6>Ingrese Precio Materia Prima</h6>
-          <input type="number" name="product" placeholder="Producto" [(ngModel)]="costPrice">
+          <input type="number" name="costprice" placeholder="Precio Materia Prima" [(ngModel)]="costPrice">
         </div>
       </div>
       <div class="row">
         <div class="col s12">
           <h6>Ingrese Costo De producción</h6>
-          <input type="text" name="quantity" placeholder="Cantidad" [(ngModel)]="productionCost">
+          <input type="number" name="productioncost" placeholder="Costo De producción" [(ngModel)]="productionCost">
         </div>
       </div>
       <div class="row">
         <div class="col s12">
           <h6>Ingrese Precio De venta</h6>
-          <input type="text" name="phone" placeholder="Celular" [(ngModel)]="salePrice">
+          <input type="number" name="saleprice" placeholder="Precio De venta" [(ngModel)]="salePrice">
         </div>
       </div>
 
@@ -36,7 +42,7 @@
   <div class="container">
     <div class="row">
       <div class="col s12 center-align">
-        <button class="btn btnblock waves-effect waves-red btn-large">Registra Producto</button>
+        <button class="btn btnblock waves-effect waves-red btn-large" [disabled]="!description || !costPrice || !productionCost || !salePrice" (click)="registerProduct()">Registra Producto</button>
       </div>
     </div>
   </div>
