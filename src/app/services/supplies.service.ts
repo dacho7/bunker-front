@@ -1,4 +1,4 @@
-import { Supplie } from './../class/supplie';
+import { Supplie } from '../models/supplie';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 

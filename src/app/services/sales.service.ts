@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { Sale } from './../class/sale';
+import { Sale } from '../models/sale';
 import { Injectable } from "@angular/core";
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 

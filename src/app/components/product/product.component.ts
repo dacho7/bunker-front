@@ -1,7 +1,7 @@
-import { ProductService } from './../services/products.service';
+import { ProductService } from '../../services/products.service';
 import { Component, OnInit } from '@angular/core';
 
-import { Product } from '../class/product';
+import { Product } from '../../models/product';
 
 @Component({
   selector: 'app-product',
@@ -33,7 +33,7 @@ export class ProductComponent implements OnInit {
     }
     this._productService.registerProduct(product).then((res) => {
       this.cleanFields(  )
-    }).catch( err => console.log(err))
+    }).catch( (err) => console.log(err))
   }
 
   cleanFields(){

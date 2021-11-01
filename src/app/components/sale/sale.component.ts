@@ -1,6 +1,6 @@
-import { SaleService } from './../services/sales.service';
+import { SaleService } from '../../services/sales.service'
 import { Component, Input, OnInit } from '@angular/core';
-import { Sale } from '../class/sale';
+import { Sale } from '../../models/sale';
 
 @Component({
   selector: 'app-sale',

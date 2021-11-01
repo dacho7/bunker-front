@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Supplie } from '../class/supplie';
-import { SupplieService } from '../services/supplies.service';
+import { Supplie } from '../../models/supplie';
+import { SupplieService } from '../../services/supplies.service';
 
 @Component({
   selector: 'app-supplies',

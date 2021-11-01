@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Product } from './../class/product';
+import { Product } from '../models/product';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Injectable ({
