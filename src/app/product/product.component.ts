@@ -1,3 +1,4 @@
+import { ProductService } from './../services/products.service';
 import { Component, OnInit } from '@angular/core';
 
 import { Product } from '../class/product';
@@ -15,29 +16,24 @@ export class ProductComponent implements OnInit {
   productionCost!: number;
   salePrice!: number;
 
-  constructor() { }
+  constructor(private _productService: ProductService) { }
 
   ngOnInit(): void {
   }
 
   async registerProduct() {
     const utility = this.salePrice - this.productionCost -this.costPrice
-    const product = new Product(this.description, this.supplies,this.costPrice, this.productionCost, this.salePrice, utility);
-    try {
-      //const res = await fetch(`https://bnkdb-fda9b-default-rtdb.firebaseio.com/${sale.id}/sales.json`, {
-      const res = await fetch("https://bnkdb-fda9b-default-rtdb.firebaseio.com/products.json", {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(product)
-      });
-      const resultDB = await res.json();
-      //this.objectRes = JSON.stringify(resultDB);
-      this.cleanFields()
-    }catch(e){
-      console.log(e);
+    const product: Product = {
+      description: this.description,
+      supplies!: this.supplies,
+      costPrice: this.costPrice,
+      productionCost: this.productionCost,
+      salePrice: this.salePrice,
+      utility: utility
     }
+    this._productService.registerProduct(product).then((res) => {
+      this.cleanFields(  )
+    }).catch( err => console.log(err))
   }
 
   cleanFields(){
