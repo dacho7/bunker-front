@@ -1,5 +1,4 @@
 import { Data } from "@angular/router"
-
 export class Sale {
   client: string
   product: string
@@ -8,6 +7,7 @@ export class Sale {
   phone: string
   address: string
   email: string
+  state: string
 
   dateCreated: Data
 
@@ -19,6 +19,7 @@ export class Sale {
     this.phone = phone;
     this.address = address;
     this.email = email;
-    this.dateCreated = new Date()
+    this.state = "En Preparacion";
+    this.dateCreated = new Date();
   }
 }

@@ -58,7 +58,7 @@ export class SaleComponent implements OnInit {
   };
 
   validateSale(){
-    if (!this.name || !this.product || !this.quantity ){
+    if (!this.name || !this.product || !this.quantity || !this.address){
       alert("Digite todos los campos")
       return false
     }
