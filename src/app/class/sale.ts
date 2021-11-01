@@ -1,5 +1,6 @@
 import { Data } from "@angular/router"
 export class Sale {
+  id?: string
   client: string
   product: string
   quantity: number
@@ -9,7 +10,7 @@ export class Sale {
   email: string
   state: string
 
-  dateCreated: Data
+  dateCreated: Date
 
   constructor(name: string,product: string, quantity: number, methodPay: string,phone: string, address: string,email: string){
     this.client = name;
@@ -22,4 +23,5 @@ export class Sale {
     this.state = "En Preparacion";
     this.dateCreated = new Date();
   }
+
 }

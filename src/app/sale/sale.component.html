@@ -34,7 +34,7 @@
           <div class="row">
             <div class="col s12">
               <h6>Ingrese Metodo De Pago<span class="oblig">*</span></h6>
-              <input type="text" name="quantity" placeholder="Cantidad" [(ngModel)]="methodPay">
+              <input type="text" name="quantity" placeholder="Ingrese Metodo de pago" [(ngModel)]="methodPay">
             </div>
           </div>
           <div class="row">
@@ -43,19 +43,13 @@
               <input type="text" name="phone" placeholder="Celular" [(ngModel)]="phone">
             </div>
           </div>
-          <div class="row">
-            <div class="col s12">
-              <h6>Ingrese Email del Cliente</h6>
-              <input type="text" name="email" placeholder="Email" [(ngModel)]="email">
-            </div>
-          </div>
+
         </form>
       </div>
-
       <div class="container">
         <div class="row">
           <div class="col s12 center-align">
-            <button class="btn btnblock waves-effect waves-red btn-large" (click)="registerSale()" [disabled]="!name || !product || !quantity">Registra Venta</button>
+            <button class="btn btnblock waves-effect waves-red btn-large" (click)="registerSale()" [disabled]="!name || !product || !quantity || !address || !methodPay">Registrar Venta</button>
           </div>
         </div>
       </div>
@@ -63,27 +57,25 @@
 
     <div class="col s6 card">
       <div class="row">
-        <div class="col">
+        <div class="col s12">
           <table>
             <tr>
               <th>Producto</th>
               <th>Domicilio</th>
               <th>cliente</th>
               <th>Numero</th>
-              <th>Estado</th>
+              <th>Envar Domicilio</th>
             </tr>
-            <tr>
-              <td>Picadax2</td>
-              <td>Los heroes frente a drogueria</td>
-              <td>Brayan David Tobar Tonguino</td>
-              <td>3193983994</td>
-              <td>En Preparacion</td>
+            <tr *ngFor="let item of salesAvailables">
+              <td>{{item.product}}</td>
+              <td>{{item.address}}</td>
+              <td>{{item.client}}</td>
+              <td>{{item.phone}}</td>
+              <td><button class="btn red" (click)="sendOrder(item.id)">En camino</button></td>
             </tr>
           </table>
         </div>
       </div>
-
-
     </div>
   </div>
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Supplie } from '../class/supplie';
+import { SupplieService } from '../services/supplies.service';
 
 @Component({
   selector: 'app-supplies',
@@ -14,29 +15,23 @@ export class SuppliesComponent implements OnInit {
   quantity!: number;
   expireDate!: Date;
 
-  constructor() { }
+  constructor( private _supplieService: SupplieService ) { }
 
   ngOnInit(): void {
   }
 
   async registerSupplie() {
     const unitPrice = parseFloat((this.totalPrice/this.quantity).toFixed(2));
-    const supplie = new Supplie(this.description, unitPrice, this.quantity, this.expireDate);
-    try {
-      //const res = await fetch(`https://bnkdb-fda9b-default-rtdb.firebaseio.com/${sale.id}/sales.json`, {
-      const res = await fetch("https://bnkdb-fda9b-default-rtdb.firebaseio.com/supplies.json", {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(supplie)
-      });
-      const resultDB = await res.json();
-      //this.objectRes = JSON.stringify(resultDB);
-      this.cleanFields()
-    }catch(e){
-      console.log(e);
+    const supplie:  Supplie = {
+      description: this.description,
+      unitPrice: unitPrice,
+      quantity: this.quantity,
+      expireDate: this.expireDate,
     }
+    this._supplieService.registerProduct(supplie).then(() =>{this.cleanFields()})
+      .catch((e) => {
+        console.log(e)
+      })
   }
 
   cleanFields(){

@@ -1,3 +1,4 @@
+import { SaleService } from './../services/sales.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { Sale } from '../class/sale';
 
@@ -11,21 +12,24 @@ export class SaleComponent implements OnInit {
   name!: string;
   product!: string;
   quantity=1;
-  methodPay! :string;
+  methodPay = "efectivo";
   phone!: string;
   address!: string;
   email!: string;
 
-  objectRes!: any;
+  salesAvailables: Array<any> = [];
 
-  constructor() {
+  constructor(private _saleService: SaleService) {
     this.methodPay = "efectivo";
+    console.log("estoy en constructor");
+    this.listAllSales();
   }
 
   ngOnInit(): void {
+    console.log('estoy en ngOnInit');
   }
 
-  async registerSale(){
+  registerSale(){
     if(!this.validateSale()) {
       return
     } else {
@@ -38,23 +42,19 @@ export class SaleComponent implements OnInit {
       if(!this.email){
         this.email = ""
       }
-      const sale = new Sale(this.name, this.product, this.quantity, this.methodPay,this.phone, this.address, this.email)
-      try {
-        //const res = await fetch(`https://bnkdb-fda9b-default-rtdb.firebaseio.com/${sale.id}/sales.json`, {
-        const res = await fetch("https://bnkdb-fda9b-default-rtdb.firebaseio.com/sales.json", {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(sale)
-        });
-        const resultDB = await res.json();
-        //this.objectRes = JSON.stringify(resultDB);
-        this.cleanFields()
-      }catch(e){
-        console.log(e);
-      }
     }
+    const sale: Sale = {
+      client: this.name,
+      product: this.product,
+      quantity: this.quantity,
+      methodPay: this.methodPay,
+      phone: this.phone,
+      address: this.address,
+      email: this.email,
+      state: "en preparacion",
+      dateCreated: new Date()
+    }
+    this._saleService.saveSale(sale).then().catch(e => console.log(e));
   };
 
   validateSale(){
@@ -70,14 +70,32 @@ export class SaleComponent implements OnInit {
     }
   }
 
-  cleanFields(){
+  sendOrder(id: string){
+    this._saleService.sendOrder(id).then((res) => {
+      this.listAllSales()
+    }).catch( err => console.log(err))
+  }
+
+  listAllSales(){
+    this._saleService.lisOnlyNotSend().subscribe(doc => {
+      doc.forEach((element: any) => {
+        const sale: Sale = {
+          id:element.payload.doc.id,
+          ...element.payload.doc.data()
+        }
+        this.salesAvailables.push(sale)
+      });
+    })
+  }
+
+  resetFields(){
     this.name = "";
     this.product = "";
     this.quantity = 1;
     this.phone = "";
     this.address = "";
     this.email = "";
-    this.methodPay = "";
+    this.methodPay = "efectivo";
   }
 
 }
