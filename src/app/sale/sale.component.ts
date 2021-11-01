@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Sale } from '../class/app.sale';
+import { Sale } from '../class/sale';
 
 @Component({
   selector: 'app-sale',
@@ -11,13 +11,16 @@ export class SaleComponent implements OnInit {
   name!: string;
   product!: string;
   quantity=1;
+  methodPay! :string;
   phone!: string;
   address!: string;
   email!: string;
 
   objectRes!: any;
 
-  constructor() {}
+  constructor() {
+    this.methodPay = "efectivo";
+  }
 
   ngOnInit(): void {
   }
@@ -35,7 +38,7 @@ export class SaleComponent implements OnInit {
       if(!this.email){
         this.email = ""
       }
-      const sale = new Sale(this.name, this.product, this.quantity,this.phone, this.address, this.email)
+      const sale = new Sale(this.name, this.product, this.quantity, this.methodPay,this.phone, this.address, this.email)
       try {
         //const res = await fetch(`https://bnkdb-fda9b-default-rtdb.firebaseio.com/${sale.id}/sales.json`, {
         const res = await fetch("https://bnkdb-fda9b-default-rtdb.firebaseio.com/sales.json", {
@@ -56,9 +59,15 @@ export class SaleComponent implements OnInit {
 
   validateSale(){
     if (!this.name || !this.product || !this.quantity ){
+      alert("Digite todos los campos")
       return false
     }
-    return true
+    if (this.methodPay === "efectivo" || this.methodPay === "nequi" || this.methodPay === "daviplata" || this.methodPay === "tarjeta"){
+      return true;
+    } else {
+      alert("Ingrese un metodo de pago valido (efectivo, targeta,nequi, daviplata)")
+      return false
+    }
   }
 
   cleanFields(){
@@ -68,6 +77,7 @@ export class SaleComponent implements OnInit {
     this.phone = "";
     this.address = "";
     this.email = "";
+    this.methodPay = "";
   }
 
 }
