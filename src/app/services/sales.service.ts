@@ -21,7 +21,10 @@ export class SaleService {
   }
 
   lisOnlyNotSend(): Observable<any> {
-    return this.firestore.collection('sales', ref=> ref.where('state', '!=', 'enviado')).snapshotChanges();
+    return this.firestore.collection('sales', ref => ref.where('state','!=','enviado')).snapshotChanges();
+//    return this.firestore.collection('sales', ref => {
+//      return ref.orderBy('dateCreated','asc').where('dateCreated','==','enviado');
+//    }).snapshotChanges();
     //return this.firestore.collection('sales').snapshotChanges();
   }
 

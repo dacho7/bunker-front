@@ -25,18 +25,28 @@ export class SaleComponent implements OnInit {
   ngOnInit(): void {
     this._saleService.lisOnlyNotSend().subscribe(doc => {
       this.salesAvailables = [];
+      let salesAux: any[] = [];
       doc.forEach((element: any) => {
         const sale: Sale = {
           id:element.payload.doc.id,
           ...element.payload.doc.data()
         }
-        this.salesAvailables.push(sale)
+        salesAux.push(sale)
       });
+//      console.log(salesAux.sort((a: Sale,b: Sale) => new Date(a.dateCreated).getTime() > new Date(b.dateCreated).getTime()));
+      this.salesAvailables = salesAux.sort((a,b): any => {
+        if (a.dateCreated > b.dateCreated) {
+          return 1
+        }
+        if (a.dateCreated < b.dateCreated){
+          return -1
+        }
+      });
+
     })
   }
 
   registerSale(){
-    console.log('in registersales');
     if(!this.validateSale()) {
       return
     } else {
@@ -62,7 +72,7 @@ export class SaleComponent implements OnInit {
       dateCreated: new Date(),
       price:this.price
     }
-    this._saleService.saveSale(sale).then().catch(e => console.log(e));
+    this._saleService.saveSale(sale).then( () => this.resetFields() ).catch(e => console.log(e));
   };
 
   validateSale(){
@@ -79,20 +89,7 @@ export class SaleComponent implements OnInit {
   }
 
   sendOrder(id: string){
-    console.log('in sendorder');
     this._saleService.sendOrder(id).then().catch( err => console.log(err))
-  }
-
-  listAllSales(){
-    this._saleService.lisOnlyNotSend().subscribe(doc => {
-      doc.forEach((element: any) => {
-        const sale: Sale = {
-          id:element.payload.doc.id,
-          ...element.payload.doc.data()
-        }
-        this.salesAvailables.push(sale)
-      });
-    })
   }
 
   resetFields(){
