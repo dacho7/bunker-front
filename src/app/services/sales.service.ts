@@ -21,12 +21,22 @@ export class SaleService {
   }
 
   lisOnlyNotSend(): Observable<any> {
-    //return this.firestore.collection('sales', ref=> ref.where('state', '!=', 'enviado')).valueChanges();
-    return this.firestore.collection('sales').valueChanges()
+    return this.firestore.collection('sales', ref=> ref.where('state', '!=', 'enviado')).snapshotChanges();
+    //return this.firestore.collection('sales').snapshotChanges();
   }
 
   sendOrder(id: string): Promise<any>{
     return this.firestore.collection('sales').doc(id).update({state: "enviado"})
+  }
+
+  viewSalesfromData(date: Date){
+    const det2 = new Date('2021-10-31');
+    const det = new Date('2021-11-1');
+    let start = new Date('2017-01-01');
+    console.log(start.getTime());
+    console.log(det)
+    console.log(det2);
+    return this.firestore.collection('sales', ref=> ref.where('dateCreated','>', det2)).snapshotChanges();
   }
 
   deleteSale(id: string): Promise<any> {

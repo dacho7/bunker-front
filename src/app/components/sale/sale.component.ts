@@ -1,5 +1,5 @@
 import { SaleService } from '../../services/sales.service'
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Sale } from '../../models/sale';
 
 @Component({
@@ -16,20 +16,27 @@ export class SaleComponent implements OnInit {
   phone!: string;
   address!: string;
   email!: string;
+  price=2000;
 
   salesAvailables: Array<any> = [];
 
-  constructor(private _saleService: SaleService) {
-    this.methodPay = "efectivo";
-    console.log("estoy en constructor");
-    this.listAllSales();
-  }
+  constructor(private _saleService: SaleService) {}
 
   ngOnInit(): void {
-    console.log('estoy en ngOnInit');
+    this._saleService.lisOnlyNotSend().subscribe(doc => {
+      this.salesAvailables = [];
+      doc.forEach((element: any) => {
+        const sale: Sale = {
+          id:element.payload.doc.id,
+          ...element.payload.doc.data()
+        }
+        this.salesAvailables.push(sale)
+      });
+    })
   }
 
   registerSale(){
+    console.log('in registersales');
     if(!this.validateSale()) {
       return
     } else {
@@ -52,7 +59,8 @@ export class SaleComponent implements OnInit {
       address: this.address,
       email: this.email,
       state: "en preparacion",
-      dateCreated: new Date()
+      dateCreated: new Date(),
+      price:this.price
     }
     this._saleService.saveSale(sale).then().catch(e => console.log(e));
   };
@@ -71,9 +79,8 @@ export class SaleComponent implements OnInit {
   }
 
   sendOrder(id: string){
-    this._saleService.sendOrder(id).then((res) => {
-      this.listAllSales()
-    }).catch( err => console.log(err))
+    console.log('in sendorder');
+    this._saleService.sendOrder(id).then().catch( err => console.log(err))
   }
 
   listAllSales(){

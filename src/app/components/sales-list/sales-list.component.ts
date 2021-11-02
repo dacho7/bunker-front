@@ -1,3 +1,5 @@
+import { Sale } from '../../models/sale'
+import { SaleService } from './../../services/sales.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,11 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SalesListComponent implements OnInit {
 
-  dateSelect!: string;
+  dateSelect=new Date();
 
-  constructor() {
+  sales: Array<any> = [];
+
+  constructor(private _salesService: SaleService) {
     //const data = new Date()
     //this.dateSelect = `${data.getMonth()+1}-${data.getDate()}-${data.getFullYear()}`
+    this.listSalesForDate();
   }
 
   ngOnInit(): void {
@@ -22,7 +27,15 @@ export class SalesListComponent implements OnInit {
   }
 
   listSalesForDate(){
-
+    this._salesService.viewSalesfromData(this.dateSelect).subscribe(doc => {
+      doc.forEach((element: any) => {
+        const sale: Sale = {
+          id:element.payload.doc.id,
+          ...element.payload.doc.data()
+        }
+        this.sales.push(sale)
+      });
+    })
   }
 
 }
