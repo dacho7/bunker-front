@@ -1,15 +1,14 @@
-import { Sale } from '../../models/sale'
+import { Sale } from '../../models/sale';
 import { SaleService } from './../../services/sales.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-sales-list',
   templateUrl: './sales-list.component.html',
-  styleUrls: ['./sales-list.component.css']
+  styleUrls: ['./sales-list.component.css'],
 })
 export class SalesListComponent implements OnInit {
-
-  dateSelect=new Date();
+  dateSelect = new Date();
 
   sales: Array<any> = [];
 
@@ -19,23 +18,19 @@ export class SalesListComponent implements OnInit {
     this.listSalesForDate();
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  listAllSales(){
+  listAllSales() {}
 
-  }
-
-  listSalesForDate(){
-    this._salesService.viewSalesfromData(this.dateSelect).subscribe(doc => {
+  listSalesForDate() {
+    this._salesService.viewSalesfromData(this.dateSelect).subscribe((doc) => {
       doc.forEach((element: any) => {
         const sale: Sale = {
-          id:element.payload.doc.id,
-          ...element.payload.doc.data()
-        }
-        this.sales.push(sale)
+          id: element.payload.doc.id,
+          ...element.payload.doc.data(),
+        };
+        this.sales.push(sale);
       });
-    })
+    });
   }
-
 }

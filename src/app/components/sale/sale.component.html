@@ -1,83 +1,127 @@
-<div >
+<div>
   <div class="green center-align title">
     <h2 class="white-text">Registrar Ventas</h2>
   </div>
-  <div class="row">
 
-    <div class="col s6 card">
-      <div class="card-content">
-        <form action="post">
-          <div class="row">
-            <div class="col s12">
-              <h6>Ingrese Nombre Del Cliente (Nombre Real, No Apodos!) <span class="oblig">*</span> </h6>
-              <input type="text" name="name" placeholder="Ingrese Nombre" [(ngModel)]="name">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col s12">
-              <h6>Ingrese Producto <span class="oblig">*</span></h6>
-              <input type="text" name="product" placeholder="Producto" [(ngModel)]="product">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col s12">
-              <h6>Ingrese Cantidad<span class="oblig">*</span></h6>
-              <input type="number" name="quantity" placeholder="Cantidad" [(ngModel)]="quantity">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col s12">
-              <h6>Ingrese Dirección de Domicilio<span class="oblig">*</span></h6>
-              <input type="text" name="address" placeholder="Dirección" [(ngModel)]="address">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col s12">
-              <h6>Ingrese Metodo De Pago<span class="oblig">*</span></h6>
-              <input type="text" name="quantity" placeholder="Ingrese Metodo de pago" [(ngModel)]="methodPay">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col s12">
-              <h6>Ingrese Celular del Cliente</h6>
-              <input type="text" name="phone" placeholder="Celular" [(ngModel)]="phone">
-            </div>
-          </div>
+  <div class="card-content">
+    <div class="row">
+      <div class="col">
+        <h6>
+          Ingrese Nombre Del Cliente (Nombre Real, No Apodos!)
+          <span class="oblig">*</span>
+        </h6>
+        <input
+          type="text"
+          name="name"
+          placeholder="Ingrese Nombre"
+          [(ngModel)]="name"
+        />
+      </div>
 
-        </form>
-      </div>
-      <div class="container">
-        <div class="row">
-          <div class="col s12 center-align">
-            <button class="btn btnblock waves-effect waves-red btn-large" (click)="registerSale()" [disabled]="!name || !product || !quantity || !address || !methodPay">Registrar Venta</button>
-          </div>
-        </div>
-      </div>
-    </div>
+      <div class="col">
+        <h6>Ingrese Producto <span class="oblig">*</span></h6>
 
-    <div class="col s6 card">
-      <div class="row">
-        <div class="col s12">
-          <table>
-            <tr>
-              <th>Producto</th>
-              <th>Domicilio</th>
-              <th>cliente</th>
-              <th>Numero</th>
-              <th>Envar Domicilio</th>
-            </tr>
-            <tr *ngFor="let item of salesAvailables">
-              <td>{{item.product}}</td>
-              <td>{{item.address}}</td>
-              <td>{{item.client}}</td>
-              <td>{{item.phone}}</td>
-              <td><button class="btn red" (click)="sendOrder(item.id)">En camino</button></td>
-            </tr>
-          </table>
-        </div>
+        <input
+          type="text"
+          name="product"
+          placeholder="Producto"
+          [(ngModel)]="product"
+        />
       </div>
+
+      <div class="col">
+        <h6>Ingrese Cantidad<span class="oblig">*</span></h6>
+        <input
+          type="number"
+          name="quantity"
+          placeholder="Cantidad"
+          [(ngModel)]="quantity"
+        />
+      </div>
+
+      <div class="col">
+        <h6>Ingrese Dirección de Domicilio<span class="oblig">*</span></h6>
+        <input
+          type="text"
+          name="address"
+          placeholder="Dirección"
+          [(ngModel)]="address"
+        />
+      </div>
+
+      <div class="col">
+        <h6>Ingrese Metodo De Pago<span class="oblig">*</span></h6>
+        <label>
+          <input
+            type="radio"
+            value="Efectivo"
+            name="payMethod"
+            [(ngModel)]="payMethod"
+          />
+          <span>Efectivo</span>
+        </label>
+        <label>
+          <input
+            type="radio"
+            value="Nequi"
+            name="payMethod"
+            [(ngModel)]="payMethod"
+          />
+          <span>Nequi</span>
+        </label>
+        <label>
+          <input
+            type="radio"
+            value="Daviplata"
+            name="payMethod"
+            [(ngModel)]="payMethod"
+          />
+          <span>Daviplata</span>
+        </label>
+      </div>
+
+      <div class="col">
+        <h6>Ingrese Celular del Cliente</h6>
+        <input
+          type="text"
+          name="phone"
+          placeholder="Celular"
+          [(ngModel)]="phone"
+        />
+      </div>
+
+      <button
+        class="btn btnblock waves-effect waves-red btn-large"
+        (click)="registerSale()"
+        [disabled]="!name || !product || !quantity || !address || !payMethod"
+      >
+        Registrar Venta
+      </button>
     </div>
   </div>
 
-
+  <div class="row">
+    <div class="col s12">
+      <table>
+        <tr>
+          <th>Producto</th>
+          <th>Domicilio</th>
+          <th>cliente</th>
+          <th>Numero</th>
+          <th>Envar Domicilio</th>
+        </tr>
+        <tr *ngFor="let item of salesAvailables">
+          <td>{{ item.product }}</td>
+          <td>{{ item.address }}</td>
+          <td>{{ item.client }}</td>
+          <td>{{ item.phone }}</td>
+          <td>
+            <button class="btn red" (click)="sendOrder(item.id)">
+              En camino
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
 </div>
