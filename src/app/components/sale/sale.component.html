@@ -19,24 +19,12 @@
       </div>
 
       <div class="col">
-        <h6>Ingrese Producto <span class="oblig">*</span></h6>
-
-        <input
-          type="text"
-          name="product"
-          placeholder="Producto"
-          [(ngModel)]="product"
-        />
-      </div>
-
-      <div class="col">
-        <h6>Ingrese Cantidad<span class="oblig">*</span></h6>
-        <input
-          type="number"
-          name="quantity"
-          placeholder="Cantidad"
-          [(ngModel)]="quantity"
-        />
+        <h6>Ingrese Producto<span class="oblig">*</span></h6>
+        <select class="select1" [(ngModel)]="product">
+          <option value="Picada personal" selected>Picada personal</option>
+          <option value="Picadax2">Picadax2</option>
+          <option value="Picadax3">Picadax3</option>
+        </select>
       </div>
 
       <div class="col">
@@ -50,7 +38,7 @@
       </div>
 
       <div class="col">
-        <h6>Ingrese Metodo De Pago<span class="oblig">*</span></h6>
+        <h6>Metodo De Pago</h6>
         <label>
           <input
             type="radio"
@@ -90,6 +78,16 @@
         />
       </div>
 
+      <div class="col">
+        <h6>Ingrese Cantidad<span class="oblig">*</span></h6>
+        <input
+          type="number"
+          name="quantity"
+          placeholder="Cantidad"
+          [(ngModel)]="quantity"
+        />
+      </div>
+
       <button
         class="btn btnblock waves-effect waves-red btn-large"
         (click)="registerSale()"
@@ -106,8 +104,8 @@
         <tr>
           <th>Producto</th>
           <th>Domicilio</th>
-          <th>cliente</th>
-          <th>Numero</th>
+          <th>Cliente</th>
+          <th>Número de celular</th>
           <th>Envar Domicilio</th>
         </tr>
         <tr *ngFor="let item of salesAvailables">

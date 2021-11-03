@@ -2,47 +2,103 @@
   <div class="light-blue darken-3 title">
     <h2 class="white-text">Registrar Producto</h2>
   </div>
+  {{ products }}
 
   <div class="container">
     <form action="post">
       <div class="row">
         <div class="col s12">
           <h6>Ingrese Descripción del producto</h6>
-          <input type="text" name="description" placeholder="Ingrese Descripción" [(ngModel)]="description">
+          <input
+            type="text"
+            name="description"
+            placeholder="Ingrese Descripción"
+            [(ngModel)]="description"
+          />
         </div>
       </div>
       <div class="row">
         <div class="col s12">
           <h6>Ingrese Caracteristicas del producto visible para el cliente</h6>
-          <input type="text" name="supplies" placeholder="Ej: 200 g de carne, papas a la francesa + lechuga" [(ngModel)]="supplies">
+          <input
+            type="text"
+            name="supplies"
+            placeholder="Ej: 200 g de carne, papas a la francesa + lechuga"
+            [(ngModel)]="supplies"
+          />
         </div>
       </div>
       <div class="row">
         <div class="col s12">
           <h6>Ingrese Precio Materia Prima</h6>
-          <input type="number" name="costprice" placeholder="Precio Materia Prima" [(ngModel)]="costPrice">
+          <div class="row">
+            <div class="col s7">
+              <div class="input-fiel">
+                <!--   <select
+                    name="miselect"
+                    class="miselect"
+                    [(ngModel)]="productsSelect"
+                  >
+                    <option
+                      [value]="item.description"
+                      *ngFor="let item of products"
+                    >
+                      {{ item.description }}
+                    </option>
+                  </select> -->
+                <select class="miselect">
+                  <option *ngFor="let item of products">
+                    {{ item.description }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="col s4">
+              <input type="number" name="costprice" placeholder="Cantidad" />
+            </div>
+            <div class="col s1">
+              <button [disabled]="quantity < 1" (click)="prints()">+</button>
+            </div>
+          </div>
         </div>
       </div>
       <div class="row">
         <div class="col s12">
           <h6>Ingrese Costo De producción</h6>
-          <input type="number" name="productioncost" placeholder="Costo De producción" [(ngModel)]="productionCost">
+          <input
+            type="number"
+            name="productioncost"
+            placeholder="Costo De producción"
+            [(ngModel)]="productionCost"
+          />
         </div>
       </div>
       <div class="row">
         <div class="col s12">
           <h6>Ingrese Precio De venta</h6>
-          <input type="number" name="saleprice" placeholder="Precio De venta" [(ngModel)]="salePrice">
+          <input
+            type="number"
+            name="saleprice"
+            placeholder="Precio De venta"
+            [(ngModel)]="salePrice"
+          />
         </div>
       </div>
-
     </form>
   </div>
 
   <div class="container">
     <div class="row">
       <div class="col s12 center-align">
-        <button class="btn btnblock waves-effect waves-red btn-large" [disabled]="!description || !costPrice || !productionCost || !salePrice" (click)="registerProduct()">Registra Producto</button>
+        <button
+          class="btn btnblock waves-effect waves-red btn-large"
+          [disabled]="
+            !description || !costPrice || !productionCost || !salePrice
+          "
+          (click)="registerProduct()"
+        >
+          Registra Producto
+        </button>
       </div>
     </div>
   </div>

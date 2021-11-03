@@ -5,34 +5,34 @@
 
   <div class="row center-align">
     <div class="col s12">
-      <input type="date" name="date" id="date" [(ngModel)]="dateSelect">
+      <input type="date" name="date" id="date" [(ngModel)]="dateSelect" />
       <button class="btn btnblock waves-effect waves-red">Ver Ventas</button>
-    <div>
-  </div>
+      <div></div>
 
-  <div class="s12">
-    <table>
-      <tr>
-        <th>Cliente</th>
-        <th>Producto</th>
-        <th>Precio</th>
-        <th>Direccion</th>
-        <th>Tipo de Pago</th>
-        <th>Total</th>
-      </tr>
-      <tr *ngFor="let item of sales">
-        <td>{{item.client}}</td>
-        <td>{{item.product}}</td>
-        <td>{{item.product}}</td>
-        <td>{{item.address}}</td>
-        <td>{{item.methodPay}}</td>
-        <td>{{item.product}}</td>
-      </tr>
-    </table>
-    <div>
-      <h4>Total Venta del dia:</h4>
-      <h5>Total Efectivo:</h5>
+      <div class="s12">
+        <table>
+          <tr>
+            <th>Cliente</th>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Direccion</th>
+            <th>Tipo de Pago</th>
+            <th>Total</th>
+          </tr>
+          <tr *ngFor="let item of sales">
+            <td>{{ item.client }}</td>
+            <td>{{ item.product }}</td>
+            <td>{{ item.product }}</td>
+            <td>{{ item.address }}</td>
+            <td>{{ item.methodPay }}</td>
+            <td>{{ item.product }}</td>
+          </tr>
+        </table>
+        <div>
+          <h4>Total Venta del dia:</h4>
+          <h5>Total Efectivo:</h5>
+        </div>
+      </div>
     </div>
   </div>
-
 </div>
