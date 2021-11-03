@@ -1,29 +1,37 @@
-import { Data } from "@angular/router"
+import { Data } from '@angular/router';
 export class Sale {
-  id?: string
-  client: string
-  product: string
-  quantity: number
-  methodPay: string
-  phone: string
-  address: string
-  email: string
-  state: string
-  price: number
+  id?: string;
+  client: string;
+  product: string;
+  quantity: number;
+  payMethod: string;
+  phone: string;
+  address: string;
+  email: string;
+  state: string;
+  price: number;
 
-  dateCreated: Date
+  dateCreated: Date;
 
-  constructor(name: string,product: string, quantity: number, methodPay: string,phone: string, address: string,email: string, price: number){
+  constructor(
+    name: string,
+    product: string,
+    quantity: number,
+    payMethod: string,
+    phone: string,
+    address: string,
+    email: string,
+    price: number
+  ) {
     this.client = name;
-    this.product= product;
+    this.product = product;
     this.quantity = quantity;
-    this.methodPay = methodPay;
+    this.payMethod = payMethod;
     this.phone = phone;
     this.address = address;
     this.email = email;
-    this.state = "En Preparacion";
+    this.state = 'En Preparacion';
     this.dateCreated = new Date();
-    this.price = price
+    this.price = price;
   }
-
 }
