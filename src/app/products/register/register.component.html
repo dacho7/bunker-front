@@ -23,7 +23,7 @@
             type="text"
             name="supplies"
             placeholder="Ej: 200 g de carne, papas a la francesa + lechuga"
-            [(ngModel)]="supplies"
+            [(ngModel)]="descriptionForCliente"
           />
         </div>
       </div>
@@ -40,10 +40,11 @@
                 matInput
                 [formControl]="myControl"
                 [matAutocomplete]="auto"
+                [(ngModel)]="descriptionSupplie"
               />
               <mat-autocomplete #auto="matAutocomplete">
                 <mat-option
-                  *ngFor="let product of allProducts"
+                  *ngFor="let product of allSupplies"
                   [value]="product.description"
                 >
                   {{ product.description }}
@@ -60,7 +61,12 @@
             />
           </mat-grid-tile>
           <mat-grid-tile>
-            <button [disabled]="quantity < 1" (click)="prints()">+</button>
+            <button
+              [disabled]="quantity < 1 || !descriptionSupplie"
+              (click)="registerSupplie()"
+            >
+              +
+            </button>
           </mat-grid-tile>
         </mat-grid-list>
       </div>
@@ -73,11 +79,18 @@
             <td>Precio</td>
             <td>Eliminar</td>
           </tr>
-          <tr *ngFor="let product of products">
-            <th>{{ product.description }}</th>
-            <th>{{ product.quantity }}</th>
-            <th>{{ product.unitPrice * product.quantity }}</th>
-            <th><button>Eliminar</button></th>
+          <tr *ngFor="let supplie of supplies">
+            <th>{{ supplie.description }}</th>
+            <th>{{ supplie.amount }}</th>
+            <th>{{ supplie.price }}</th>
+            <th>
+              <button (click)="deleteSupplie(supplie.id)">Eliminar</button>
+            </th>
+          </tr>
+          <tr>
+            <th>
+              <h3>total: {{ totalSupplies }}</h3>
+            </th>
           </tr>
         </table>
       </mat-grid-list>
@@ -113,7 +126,11 @@
         <button
           class="btn btnblock waves-effect waves-red btn-large"
           [disabled]="
-            !description || !costPrice || !productionCost || !salePrice
+            !description ||
+            !descriptionForCliente ||
+            !costPrice ||
+            !productionCost ||
+            !salePrice
           "
           (click)="registerProduct()"
         >

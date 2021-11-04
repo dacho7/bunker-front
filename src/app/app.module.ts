@@ -11,10 +11,6 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { SaleComponent } from './components/sale/sale.component';
-import { ProductComponent } from './components/product/product.component';
-import { SuppliesComponent } from './components/supplies/supplies.component';
-import { SalesListComponent } from './components/sales-list/sales-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductsComponent } from './products.component';
 
@@ -23,14 +19,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 MatFormFieldModule;
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    SaleComponent,
-    ProductComponent,
-    SuppliesComponent,
-    SalesListComponent,
-    ProductsComponent,
-  ],
+  declarations: [AppComponent, ProductsComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -1,6 +1,8 @@
+import { SupplieIn } from './../products/supplieIn';
 export class Product {
   description: string;
-  supplies!: string;
+  descriptionForCliente: string;
+  supplies!: Array<SupplieIn>;
   costPrice: number;
   productionCost: number;
   salePrice: number;
@@ -8,13 +10,15 @@ export class Product {
 
   constructor(
     description: string,
-    supplies: string,
+    descriptionForClient: string,
+    supplies: Array<SupplieIn>,
     costPrice: number,
     productionCost: number,
     salePrice: number,
     utility: number
   ) {
     this.description = description;
+    this.descriptionForCliente = descriptionForClient;
     this.supplies = supplies;
     this.costPrice = costPrice;
     this.productionCost = productionCost;

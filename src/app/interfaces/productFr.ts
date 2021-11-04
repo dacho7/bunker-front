@@ -1,8 +1,8 @@
-import { RefSupplie } from './refSupplie';
+import { SupplieIn } from './../products/supplieIn';
 
 export interface ProductFr {
   description: string;
-  supplies: Array<RefSupplie>[];
+  supplies: Array<SupplieIn>[];
   costPrice: number;
   productionCost: number;
   salePrice: number;

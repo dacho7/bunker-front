@@ -1,4 +1,4 @@
 export interface RefSupplie {
   id: string;
-  price: number;
+  amount: number;
 }

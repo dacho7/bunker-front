@@ -10,12 +10,7 @@
           Ingrese Nombre Del Cliente (Nombre Real, No Apodos!)
           <span class="oblig">*</span>
         </h3>
-        <input
-          type="text"
-          name="name"
-          placeholder="Ingrese Nombre"
-          [(ngModel)]="name"
-        />
+        <input type="text" name="name" placeholder="Ingrese Nombre" />
       </div>
 
       <div class="col">
@@ -41,63 +36,33 @@
 
       <div class="col">
         <h3>Ingrese Dirección de Domicilio<span class="oblig">*</span></h3>
-        <input
-          type="text"
-          name="address"
-          placeholder="Dirección"
-          [(ngModel)]="address"
-        />
+        <input type="text" name="address" placeholder="Dirección" />
       </div>
 
       <div class="col">
         <h3>Metodo De Pago</h3>
         <label>
-          <input
-            type="radio"
-            value="Efectivo"
-            name="payMethod"
-            [(ngModel)]="payMethod"
-          />
+          <input type="radio" value="Efectivo" name="payMethod" />
           <span>Efectivo</span>
         </label>
         <label>
-          <input
-            type="radio"
-            value="Nequi"
-            name="payMethod"
-            [(ngModel)]="payMethod"
-          />
+          <input type="radio" value="Nequi" name="payMethod" />
           <span>Nequi</span>
         </label>
         <label>
-          <input
-            type="radio"
-            value="Daviplata"
-            name="payMethod"
-            [(ngModel)]="payMethod"
-          />
+          <input type="radio" value="Daviplata" name="payMethod" />
           <span>Daviplata</span>
         </label>
       </div>
 
       <div class="col">
         <h3>Ingrese Celular del Cliente</h3>
-        <input
-          type="text"
-          name="phone"
-          placeholder="Celular"
-          [(ngModel)]="phone"
-        />
+        <input type="text" name="phone" placeholder="Celular" />
       </div>
 
       <div class="col">
         <h3>Ingrese Cantidad<span class="oblig">*</span></h3>
-        <input
-          type="number"
-          name="quantity"
-          placeholder="Cantidad"
-          [(ngModel)]="quantity"
-        />
+        <input type="number" name="quantity" placeholder="Cantidad" />
       </div>
 
       <button

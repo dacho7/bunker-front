@@ -1,6 +1,6 @@
-import { Observable } from 'rxjs';
 import { Product } from './../../models/product';
-import { Supplie } from './../../models/supplie';
+import { SupplieIn } from './../supplieIn';
+import { SupplieFr } from './../../interfaces/supplieFr';
 import { SupplieService } from './../../services/supplies.service';
 import { ProductService } from './../../services/products.service';
 import { Component, OnInit } from '@angular/core';
@@ -13,15 +13,19 @@ import { FormControl } from '@angular/forms';
 })
 export class RegisterComponent implements OnInit {
   description!: string;
-  supplies!: string;
-  costPrice!: number;
+  descriptionForCliente = '';
+  descriptionSupplie = '';
+  costPrice = 0;
   productionCost!: number;
   salePrice!: number;
-  allProducts: Array<any> = [];
+  allSupplies: Array<any> = [];
   products: Array<any> = [];
   productsSelect = '';
   quantity = 0;
-  id = 0;
+  id = '';
+  totalSupplies = 0;
+
+  supplies: Array<SupplieIn> = [];
 
   myControl = new FormControl();
   options: string[] = ['One', 'Two', 'Three'];
@@ -33,15 +37,13 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this._supplieService.listAllSupplies().subscribe((doc) => {
-      this.allProducts = [];
-      this.products = [];
+      this.allSupplies = [];
       doc.forEach((element: any) => {
-        const supplie: Supplie = {
+        const supplie: SupplieFr = {
           id: element.payload.doc.id,
           ...element.payload.doc.data(),
         };
-        this.allProducts.push(supplie);
-        this.products.push(supplie);
+        this.allSupplies.push(supplie);
       });
     });
   }
@@ -50,6 +52,7 @@ export class RegisterComponent implements OnInit {
     const utility = this.salePrice - this.productionCost - this.costPrice;
     const product: Product = {
       description: this.description,
+      descriptionForCliente: this.descriptionForCliente,
       supplies: this.supplies,
       costPrice: this.costPrice,
       productionCost: this.productionCost,
@@ -64,8 +67,31 @@ export class RegisterComponent implements OnInit {
       .catch((err) => console.log(err));
   }
 
-  prints() {
-    console.log(this.productsSelect);
+  registerSupplie() {
+    this.allSupplies.forEach((supp) => {
+      if (this.descriptionSupplie == supp.description) {
+        this.supplies.push({
+          id: supp.id,
+          description: supp.description,
+          amount: this.quantity,
+          price: this.quantity * supp.unitPrice,
+        });
+        this.costPrice += this.quantity * supp.unitPrice;
+      }
+    });
+  }
+
+  deleteSupplie(id: string) {
+    console.log(id);
+    this.supplies.forEach((supp) => {
+      if (supp.id == id) {
+        this.costPrice = this.costPrice - supp.price;
+      }
+    });
+    this.supplies = this.supplies.filter((sup) => sup.id != id);
+    if (this.supplies.length == 0) {
+      this.costPrice = 0;
+    }
   }
 
   cleanFields() {
