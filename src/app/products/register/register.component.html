@@ -27,48 +27,61 @@
           />
         </div>
       </div>
+
       <div class="row">
-        <div class="col s12">
-          <h2>Ingrese Precio Materia Prima</h2>
-          <div class="row">
-            <div class="col s7">
-              <div class="input-fiel">
-                <form class="example-form">
-                  <!-- <input
-                    type="text"
-                    placeholder="Pick one"
-                    aria-label="Number"
-                    matInput
-                    [matAutocomplete]="auto"
-                  />
-                  <mat-autocomplete
-                    autoActiveFirstOption
-                    #auto="matAutocomplete"
-                  >
-                    <mat-option
-                      *ngFor="let option of products"
-                      [value]="option.description"
-                    >
-                      {{ option.description }}
-                    </mat-option>
-                  </mat-autocomplete> -->
-                </form>
-              </div>
-            </div>
-            <div class="col s4">
+        <h2>Ingrese Precio Materia Prima</h2>
+        <mat-grid-list cols="5">
+          <mat-grid-tile>
+            <mat-form-field>
               <input
-                type="number"
-                name="costprice"
-                placeholder="Cantidad"
-                [(ngModel)]="quantity"
+                type="text"
+                placeholder="Selecciona producto"
+                aria-label="Number"
+                matInput
+                [formControl]="myControl"
+                [matAutocomplete]="auto"
               />
-            </div>
-            <div class="col s1">
-              <button [disabled]="quantity < 1" (click)="prints()">+</button>
-            </div>
-          </div>
-        </div>
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option
+                  *ngFor="let product of allProducts"
+                  [value]="product.description"
+                >
+                  {{ product.description }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <input
+              type="number"
+              name="costprice"
+              placeholder="Cantidad"
+              [(ngModel)]="quantity"
+            />
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <button [disabled]="quantity < 1" (click)="prints()">+</button>
+          </mat-grid-tile>
+        </mat-grid-list>
       </div>
+
+      <mat-grid-list cols="0">
+        <table>
+          <tr>
+            <td>Insumo</td>
+            <td>Cantidad</td>
+            <td>Precio</td>
+            <td>Eliminar</td>
+          </tr>
+          <tr *ngFor="let product of products">
+            <th>{{ product.description }}</th>
+            <th>{{ product.quantity }}</th>
+            <th>{{ product.unitPrice * product.quantity }}</th>
+            <th><button>Eliminar</button></th>
+          </tr>
+        </table>
+      </mat-grid-list>
+
       <div class="row">
         <div class="col s12">
           <h2>Ingrese Costo De producción</h2>

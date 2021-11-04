@@ -6,10 +6,10 @@
   <div class="card-content">
     <div class="row">
       <div class="col">
-        <h6>
+        <h3>
           Ingrese Nombre Del Cliente (Nombre Real, No Apodos!)
           <span class="oblig">*</span>
-        </h6>
+        </h3>
         <input
           type="text"
           name="name"
@@ -19,16 +19,28 @@
       </div>
 
       <div class="col">
-        <h6>Ingrese Producto<span class="oblig">*</span></h6>
-        <select class="select1" [(ngModel)]="product">
-          <option value="Picada personal" selected>Picada personal</option>
-          <option value="Picadax2">Picadax2</option>
-          <option value="Picadax3">Picadax3</option>
-        </select>
+        <h3>Ingrese Producto<span class="oblig">*</span></h3>
+
+        <!-- <input
+          type="text"
+          placeholder="Producto"
+          aria-label="Number"
+          matInput
+          [matAutocomplete]="auto"
+          [(ngModel)]="product"
+        />
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option
+            *ngFor="let option of products"
+            [value]="option.description"
+          >
+            {{ option.description }}
+          </mat-option>
+        </mat-autocomplete> -->
       </div>
 
       <div class="col">
-        <h6>Ingrese Dirección de Domicilio<span class="oblig">*</span></h6>
+        <h3>Ingrese Dirección de Domicilio<span class="oblig">*</span></h3>
         <input
           type="text"
           name="address"
@@ -38,7 +50,7 @@
       </div>
 
       <div class="col">
-        <h6>Metodo De Pago</h6>
+        <h3>Metodo De Pago</h3>
         <label>
           <input
             type="radio"
@@ -69,7 +81,7 @@
       </div>
 
       <div class="col">
-        <h6>Ingrese Celular del Cliente</h6>
+        <h3>Ingrese Celular del Cliente</h3>
         <input
           type="text"
           name="phone"
@@ -79,7 +91,7 @@
       </div>
 
       <div class="col">
-        <h6>Ingrese Cantidad<span class="oblig">*</span></h6>
+        <h3>Ingrese Cantidad<span class="oblig">*</span></h3>
         <input
           type="number"
           name="quantity"

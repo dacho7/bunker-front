@@ -1,3 +1,5 @@
+import { Product } from './../../models/product';
+import { ProductService } from './../../services/products.service';
 import { SaleService } from '../../services/sales.service';
 import { Component, OnInit } from '@angular/core';
 import { Sale } from '../../models/sale';
@@ -10,6 +12,7 @@ import { Sale } from '../../models/sale';
 export class SaleComponent implements OnInit {
   name!: string;
   product!: string;
+  products: Array<any> = [];
   quantity = 1;
   payMethod = 'Efectivo';
   phone!: string;
@@ -19,7 +22,10 @@ export class SaleComponent implements OnInit {
 
   salesAvailables: Array<any> = [];
 
-  constructor(private _saleService: SaleService) {}
+  constructor(
+    private _saleService: SaleService,
+    private _productService: ProductService
+  ) {}
 
   ngOnInit(): void {
     this._saleService.lisOnlyNotSend().subscribe((doc) => {
@@ -40,6 +46,16 @@ export class SaleComponent implements OnInit {
         if (a.dateCreated < b.dateCreated) {
           return -1;
         }
+      });
+    });
+    this._productService.listAllProducts().subscribe((doc) => {
+      this.products = [];
+      doc.forEach((element: any) => {
+        const product: Product = {
+          id: element.payload.doc.id,
+          ...element.payload.doc.data(),
+        };
+        this.products.push(product);
       });
     });
   }

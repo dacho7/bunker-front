@@ -1,25 +1,30 @@
-import { SupplieService } from './../../services/supplies.service';
-import { ProductService } from '../../services/products.service';
-import { Component, OnInit } from '@angular/core';
-
-import { Product } from '../../models/product';
+import { Observable } from 'rxjs';
+import { Product } from './../../models/product';
 import { Supplie } from './../../models/supplie';
+import { SupplieService } from './../../services/supplies.service';
+import { ProductService } from './../../services/products.service';
+import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
-  selector: 'app-product',
-  templateUrl: './product.component.html',
-  styleUrls: ['./product.component.css'],
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css'],
 })
-export class ProductComponent implements OnInit {
+export class RegisterComponent implements OnInit {
   description!: string;
   supplies!: string;
   costPrice!: number;
   productionCost!: number;
   salePrice!: number;
+  allProducts: Array<any> = [];
   products: Array<any> = [];
   productsSelect = '';
   quantity = 0;
   id = 0;
+
+  myControl = new FormControl();
+  options: string[] = ['One', 'Two', 'Three'];
 
   constructor(
     private _productService: ProductService,
@@ -28,12 +33,14 @@ export class ProductComponent implements OnInit {
 
   ngOnInit(): void {
     this._supplieService.listAllSupplies().subscribe((doc) => {
+      this.allProducts = [];
       this.products = [];
       doc.forEach((element: any) => {
         const supplie: Supplie = {
           id: element.payload.doc.id,
           ...element.payload.doc.data(),
         };
+        this.allProducts.push(supplie);
         this.products.push(supplie);
       });
     });

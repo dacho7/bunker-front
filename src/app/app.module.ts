@@ -1,4 +1,6 @@
-import { NgModule } from '@angular/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 
@@ -13,6 +15,12 @@ import { SaleComponent } from './components/sale/sale.component';
 import { ProductComponent } from './components/product/product.component';
 import { SuppliesComponent } from './components/supplies/supplies.component';
 import { SalesListComponent } from './components/sales-list/sales-list.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProductsComponent } from './products.component';
+
+import { MatToolbarModule } from '@angular/material/toolbar';
+
+MatFormFieldModule;
 
 @NgModule({
   declarations: [
@@ -21,6 +29,7 @@ import { SalesListComponent } from './components/sales-list/sales-list.component
     ProductComponent,
     SuppliesComponent,
     SalesListComponent,
+    ProductsComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,8 +37,13 @@ import { SalesListComponent } from './components/sales-list/sales-list.component
     FormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatToolbarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}
