@@ -1,4 +1,4 @@
-export interface SupplieIn {
+export interface SuppliesForProduct {
   id: string;
   description: string;
   amount: number;

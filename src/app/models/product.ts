@@ -1,8 +1,8 @@
-import { SupplieIn } from './../products/supplieIn';
+import { SuppliesForProduct } from './../interfaces/supplies/suppliesForProduct';
 export class Product {
-  description: string;
-  descriptionForCliente: string;
-  supplies!: Array<SupplieIn>;
+  descriptionProduct: string;
+  descriptionForPublic: string;
+  supplies!: Array<SuppliesForProduct>;
   costPrice: number;
   productionCost: number;
   salePrice: number;
@@ -11,14 +11,14 @@ export class Product {
   constructor(
     description: string,
     descriptionForClient: string,
-    supplies: Array<SupplieIn>,
+    supplies: Array<SuppliesForProduct>,
     costPrice: number,
     productionCost: number,
     salePrice: number,
     utility: number
   ) {
-    this.description = description;
-    this.descriptionForCliente = descriptionForClient;
+    this.descriptionProduct = description;
+    this.descriptionForPublic = descriptionForClient;
     this.supplies = supplies;
     this.costPrice = costPrice;
     this.productionCost = productionCost;

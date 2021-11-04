@@ -1,6 +1,6 @@
+import { SupplieFr } from '../../interfaces/supplies/supplieFr';
 import { Product } from './../../models/product';
-import { SupplieIn } from './../supplieIn';
-import { SupplieFr } from './../../interfaces/supplieFr';
+import { SuppliesForProduct } from '../../interfaces/supplies/suppliesForProduct';
 import { SupplieService } from './../../services/supplies.service';
 import { ProductService } from './../../services/products.service';
 import { Component, OnInit } from '@angular/core';
@@ -12,20 +12,17 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
-  description!: string;
-  descriptionForCliente = '';
+  descriptionProduct!: string;
+  descriptionForPublic = '';
   descriptionSupplie = '';
   costPrice = 0;
   productionCost!: number;
   salePrice!: number;
   allSupplies: Array<any> = [];
-  products: Array<any> = [];
-  productsSelect = '';
   quantity = 0;
   id = '';
-  totalSupplies = 0;
 
-  supplies: Array<SupplieIn> = [];
+  supplies: Array<SuppliesForProduct> = [];
 
   myControl = new FormControl();
   options: string[] = ['One', 'Two', 'Three'];
@@ -51,8 +48,8 @@ export class RegisterComponent implements OnInit {
   async registerProduct() {
     const utility = this.salePrice - this.productionCost - this.costPrice;
     const product: Product = {
-      description: this.description,
-      descriptionForCliente: this.descriptionForCliente,
+      descriptionProduct: this.descriptionProduct,
+      descriptionForPublic: this.descriptionForPublic,
       supplies: this.supplies,
       costPrice: this.costPrice,
       productionCost: this.productionCost,
@@ -62,12 +59,16 @@ export class RegisterComponent implements OnInit {
     this._productService
       .registerProduct(product)
       .then((res) => {
+        this.supplies = [];
         this.cleanFields();
       })
       .catch((err) => console.log(err));
   }
 
   registerSupplie() {
+    if (!this.quantity) {
+      this.quantity = 1;
+    }
     this.allSupplies.forEach((supp) => {
       if (this.descriptionSupplie == supp.description) {
         this.supplies.push({
@@ -77,25 +78,25 @@ export class RegisterComponent implements OnInit {
           price: this.quantity * supp.unitPrice,
         });
         this.costPrice += this.quantity * supp.unitPrice;
+        this.quantity = 0;
+        this.descriptionSupplie = '';
       }
     });
   }
 
-  deleteSupplie(id: string) {
-    console.log(id);
-    this.supplies.forEach((supp) => {
-      if (supp.id == id) {
-        this.costPrice = this.costPrice - supp.price;
-      }
-    });
-    this.supplies = this.supplies.filter((sup) => sup.id != id);
+  deleteSupplie(id: number, price: number) {
+    let rs = this.supplies.splice(id, 1);
+    if (rs) {
+      this.costPrice = this.costPrice - price;
+    }
     if (this.supplies.length == 0) {
       this.costPrice = 0;
     }
   }
 
   cleanFields() {
-    this.description = '';
+    this.descriptionProduct = '';
+    this.descriptionForPublic = '';
     this.costPrice = 0;
     this.productionCost = 0;
     this.salePrice = 0;
