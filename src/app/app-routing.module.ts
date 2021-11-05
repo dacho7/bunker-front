@@ -12,11 +12,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./products/products.module').then((m) => m.ProductsModule),
   },
-  /* {
+  {
     path: 'sales',
     loadChildren: () =>
-      import('./products/products.module').then((m) => m.ProductsModule),
-  }, */
+      import('./sales/sales.module').then((m) => m.SalesModule),
+  },
 
   /*  {
     path: 'registersale',

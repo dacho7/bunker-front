@@ -1,0 +1,20 @@
+.btnblock {
+  width: 100%;
+  border-radius: 10rem;
+}
+
+.title{
+  padding: 1px;
+  border-radius: 4px;
+}
+
+.oblig {
+  color: red;
+}
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+  margin:1rem auto;
+  max-width: 800px;
+}

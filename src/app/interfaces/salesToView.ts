@@ -1,4 +1,4 @@
-export interface SaleFr {
+export interface SalesToView {
   id: string;
   client: string;
   product: string;

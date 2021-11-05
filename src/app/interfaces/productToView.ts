@@ -1,6 +1,6 @@
 import { SuppliesForProduct } from './supplies/suppliesForProduct';
 
-export interface ProductFr {
+export interface ProductToView {
   id: string;
   description: string;
   supplies: Array<SuppliesForProduct>[];
