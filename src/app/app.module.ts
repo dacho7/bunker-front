@@ -9,17 +9,11 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { ProductComponent } from './components/product/product.component';
 import { SuppliesComponent } from './components/supplies/supplies.component';
 import { SalesListComponent } from './components/sales-list/sales-list.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ProductComponent,
-    SuppliesComponent,
-    SalesListComponent,
-  ],
+  declarations: [AppComponent, SuppliesComponent, SalesListComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

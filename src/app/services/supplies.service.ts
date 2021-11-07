@@ -1,5 +1,5 @@
+import { SupplieToRegister } from './../../interfaces/sales/supplies/SupplieToRegister';
 import { Observable } from 'rxjs';
-import { Supplie } from '../models/supplie';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 
@@ -9,7 +9,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 export class SupplieService {
   constructor(private firestore: AngularFirestore) {}
 
-  registerSupplie(supplie: Supplie): Promise<any> {
+  registerSupplie(supplie: SupplieToRegister): Promise<any> {
     return this.firestore.collection('supplies').add(supplie);
   }
 

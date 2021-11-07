@@ -1,3 +1,4 @@
+import { ProductToRegister } from './../../interfaces/sales/products/ProductsToRegister';
 import { Injectable } from '@angular/core';
 import { Product } from '../models/product';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
@@ -9,7 +10,7 @@ import { Observable } from 'rxjs';
 export class ProductService {
   constructor(private firestore: AngularFirestore) {}
 
-  registerProduct(product: Product): Promise<any> {
+  registerProduct(product: ProductToRegister): Promise<any> {
     return this.firestore.collection('products').add(product);
   }
 

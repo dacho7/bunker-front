@@ -1,27 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ProductComponent } from './components/product/product.component';
-import { SuppliesComponent } from './components/supplies/supplies.component';
-import { SalesListComponent } from './components/sales-list/sales-list.component';
-
 const routes: Routes = [
   {
-    path: 'registersale',
+    path: 'sales',
     loadChildren: () =>
       import('./sales/sales.module').then((m) => m.SalesModule),
   },
   {
-    path: 'registerproduct',
-    component: ProductComponent,
-  },
-  {
-    path: 'registersupplie',
-    component: SuppliesComponent,
-  },
-  {
-    path: 'viewsales',
-    component: SalesListComponent,
+    path: 'products',
+    loadChildren: () =>
+      import('./products/products.module').then((m) => m.ProductsModule),
   },
 ];
 

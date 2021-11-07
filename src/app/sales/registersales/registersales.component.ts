@@ -1,7 +1,7 @@
 import { SaleService } from './../../services/sales.service';
 import { SaleToRegister } from './../../../interfaces/sales/SaleToRegister';
 import { Component, OnInit } from '@angular/core';
-import { SalesToView } from 'src/interfaces/sales/SaleToView';
+import { SaleToView } from 'src/interfaces/sales/SaleToView';
 
 @Component({
   selector: 'app-registersales',
@@ -27,7 +27,7 @@ export class RegistersalesComponent implements OnInit {
       this.salesAvailables = [];
       let salesAux: any[] = [];
       doc.forEach((element: any) => {
-        const sale: SalesToView = {
+        const sale: SaleToView = {
           id: element.payload.doc.id,
           ...element.payload.doc.data(),
         };
