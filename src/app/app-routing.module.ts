@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { SaleComponent } from './components/sale/sale.component'
 import { ProductComponent } from './components/product/product.component';
 import { SuppliesComponent } from './components/supplies/supplies.component';
 import { SalesListComponent } from './components/sales-list/sales-list.component';
@@ -9,24 +8,25 @@ import { SalesListComponent } from './components/sales-list/sales-list.component
 const routes: Routes = [
   {
     path: 'registersale',
-    component: SaleComponent
+    loadChildren: () =>
+      import('./sales/sales.module').then((m) => m.SalesModule),
   },
   {
     path: 'registerproduct',
-    component: ProductComponent
+    component: ProductComponent,
   },
   {
     path: 'registersupplie',
-    component: SuppliesComponent
+    component: SuppliesComponent,
   },
   {
     path: 'viewsales',
-    component: SalesListComponent
+    component: SalesListComponent,
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
