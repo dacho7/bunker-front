@@ -17,7 +17,7 @@ export class RegisterComponent implements OnInit {
   descriptionSupplie = '';
   costPrice = 0;
   productionCost!: number;
-  salePrice!: number;
+  salePrice: number = 0;
   allSupplies: Array<any> = [];
   quantity = 0;
   id = '';
@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this._supplieService.listAllSupplies().subscribe((doc) => {
+    this._supplieService.listAllSupplies().subscribe((doc: any) => {
       this.allSupplies = [];
       doc.forEach((element: any) => {
         const supplie: SupplieFr = {

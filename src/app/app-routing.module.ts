@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
@@ -17,31 +18,6 @@ const routes: Routes = [
     loadChildren: () =>
       import('./sales/sales.module').then((m) => m.SalesModule),
   },
-
-  /*  {
-    path: 'registersale',
-    component: SaleComponent,
-  },
-  {
-    path: 'registerproduct',
-    component: ProductComponent,
-  },
-  {
-    path: 'registersupplie',
-    component: SuppliesComponent,
-  },
-  {
-    path: 'viewsales',
-    component: SalesListComponent,
-  },
-  {
-    path: 'adminsupplies',
-    component: SuppliesproductComponent,
-  },
-  {
-    path: '**',
-    redirectTo: 'sal',
-  }, */
 ];
 
 @NgModule({
