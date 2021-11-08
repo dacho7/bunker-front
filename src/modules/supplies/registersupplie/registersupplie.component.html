@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="grey darken-3 title">
+    <h2 class="white-text">Registrar Insumo</h2>
+  </div>
+
+  <div class="container left-align">
+    <form action="post">
+      <div class="row">
+        <div class="col s12">
+          <h6>Ingrese Descripción del Insumo</h6>
+          <input
+            type="text"
+            name="description"
+            placeholder="Ingrese Descripción"
+            [(ngModel)]="description"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <h6>Ingrese Precio total pagado por el Insumo</h6>
+          <input
+            type="number"
+            name="totalprice"
+            placeholder="Precio total"
+            [(ngModel)]="totalPrice"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <h6>
+            Ingrese Cantidad de unidades (en caso de gramos y kg o unidad minima
+            para contabilizar en un producto)
+          </h6>
+          <input
+            type="number"
+            name="quantity"
+            placeholder="cantidad"
+            [(ngModel)]="quantity"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <h6>Ingrese Fecha de Vencimiento</h6>
+          <input
+            type="date"
+            name="expiredate"
+            placeholder="Fecha de Vencimiento"
+            [(ngModel)]="expireDate"
+          />
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col s12 center-align">
+        <button
+          class="btn btnblock waves-effect waves-red btn-large"
+          [disabled]="!description || !totalPrice || !quantity || !expireDate"
+          (click)="registerSupplie()"
+        >
+          Registra Producto
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
