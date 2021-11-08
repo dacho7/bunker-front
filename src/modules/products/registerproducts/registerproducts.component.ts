@@ -10,10 +10,9 @@ import { FormControl } from '@angular/forms';
 @Component({
   selector: 'app-registerproducts',
   templateUrl: './registerproducts.component.html',
-  styleUrls: ['./registerproducts.component.css']
+  styleUrls: ['./registerproducts.component.css'],
 })
 export class RegisterproductsComponent implements OnInit {
-
   descriptionProduct!: string;
   descriptionForPublic = '';
   descriptionSupplie = '';
@@ -103,5 +102,4 @@ export class RegisterproductsComponent implements OnInit {
     this.productionCost = 0;
     this.salePrice = 0;
   }
-
 }

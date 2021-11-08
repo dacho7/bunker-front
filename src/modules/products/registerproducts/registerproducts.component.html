@@ -1,8 +1,8 @@
-<div class="example-container">
+<div class="container">
   <h2>Registrar Producto</h2>
   <div class="row">
-      <div class="col">
-        <h3>Ingrese Descripción del producto</h3>
+    <div class="col s12">
+      <h5>Ingrese Descripción del producto</h5>
       <input
         type="text"
         name="description"
@@ -11,112 +11,127 @@
       />
     </div>
   </div>
-  <div class="row">
- <h2>
-
-   Ingrese Caracteristicas del producto visible para el cliente
- </h2>
-
-    <input
-      type="text"
-      name="descriptionForClient"
-      placeholder="Ej: 200 g de carne, papas a la francesa + lechuga"
-      [(ngModel)]="descriptionForPublic"
-    />
-  </div>
- <div>
-
-
-    <div>
-
-
-      <div class="row">
+  <div>
+    <div class="row">
+      <div class="col s12">
+        <h5>Ingrese Caracteristicas del producto visible para el cliente</h5>
         <input
           type="text"
-          placeholder="Selecciona producto"
-          name="producAdd"
-          [(ngModel)]="descriptionSupplie"
+          name="descriptionForClient"
+          placeholder="Ej: 200 g de carne, papas a la francesa + lechuga"
+          [(ngModel)]="descriptionForPublic"
         />
       </div>
     </div>
-    <div>
 
-
+    <div class="row">
       <div class="row">
-        <input
-          type="number"
-          name="costprice"
-          placeholder="Cantidad"
-          [(ngModel)]="quantity"
-        />
+        <div class="col s12">
+          <div class="row">
+            <div class="input-field col s12">
+              <input
+                *ngFor="let item of allSupplies"
+                type="text"
+                id="autocomplete-input"
+                class="autocomplete"
+                value="12"
+              />
+              <label for="autocomplete-input">Autocomplete</label>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    <div>
-
-
-      <button
-        [disabled]="quantity < 1 || !descriptionSupplie"
-        (click)="registerSupplie()"
+      <script>
+        const val = document.getElementById("autocomplete-input");
+        console.log(val);
+      </script>
       >
-        +
-      </button>
-    </div>
-  </div>
-  <table>
-    <tr>
-      <td>Insumo</td>
-      <td>Cantidad</td>
-      <td>Precio</td>
-      <td>Eliminar</td>
-    </tr>
-    <tr *ngFor="let supplie of supplies; let i = index">
-      <th>{{ i }} - {{ supplie.description }}</th>
-      <th>{{ supplie.amount }}</th>
-      <th>{{ supplie.price }}</th>
-      <th>
-        <button (click)="deleteSupplie(i, supplie.price)">Eliminar</button>
-      </th>
-    </tr>
-    <tr>
-      <th>
-        <h3>Costo de Materia Prima: {{ costPrice }}</h3>
-      </th>
-    </tr>
-  </table>
-  <div class="row">
-    <h2>
-      Ingrese Costo De producción
-    </h2>
-    <input
-      type="number"
-      name="productioncost"
-      placeholder="Costo De producción"
-      [(ngModel)]="productionCost"
-    />
-  </div>
-  <div class="row">
-    <h2>
+      <!-- <div class="col s4">
+        <div>
+          <h6>Ingrese Producto</h6>
+        </div>
+        <div>
+          <input
+            type="text"
+            placeholder="Selecciona producto"
+            name="producAdd"
+            [(ngModel)]="descriptionSupplie"
+          />
+        </div>
 
-      Ingrese Precio De venta
-    </h2>
-    <input
-      type="number"
-      name="salepric"
-      placeholder="Precio De venta"
-      [(ngModel)]="salePrice"
-    />
+      </div>
+      <div class="col s4">
+        <div><h6>Ingrese Cantidad</h6></div>
+        <div class="row">
+          <input
+            type="number"
+            name="costprice"
+            placeholder="Cantidad"
+            [(ngModel)]="quantity"
+          />
+        </div>
+      </div>
+      <div class="col s4">
+        <div><h6>Agregar</h6></div>
+        <button
+          [disabled]="quantity < 1 || !descriptionSupplie"
+          (click)="registerSupplie()"
+        >
+          +
+        </button>
+      </div> -->
+    </div>
+    <table>
+      <tr>
+        <td>Insumo</td>
+        <td>Cantidad</td>
+        <td>Precio</td>
+        <td>Eliminar</td>
+      </tr>
+      <tr *ngFor="let supplie of supplies; let i = index">
+        <th>{{ supplie.description }}</th>
+        <th>{{ supplie.amount }}</th>
+        <th>{{ supplie.price }}</th>
+        <th>
+          <button (click)="deleteSupplie(i, supplie.price)">Eliminar</button>
+        </th>
+      </tr>
+      <tr>
+        <th>
+          <h5>Costo de Materia Prima: {{ costPrice }}</h5>
+        </th>
+      </tr>
+    </table>
+    <div class="row">
+      <h5>Ingrese Costo De producción</h5>
+      <input
+        type="number"
+        name="productioncost"
+        placeholder="Costo De producción"
+        [(ngModel)]="productionCost"
+      />
+    </div>
+    <div class="row">
+      <h5>Ingrese Precio De venta</h5>
+      <input
+        type="number"
+        name="salepric"
+        placeholder="Precio De venta"
+        [(ngModel)]="salePrice"
+      />
+    </div>
+    <button
+      class="btn btnblock waves-effect waves-red btn-large"
+      [disabled]="
+        !descriptionProduct ||
+        !descriptionForPublic ||
+        !costPrice ||
+        !productionCost ||
+        !salePrice
+      "
+      (click)="registerProduct()"
+    >
+      Registra Producto
+    </button>
   </div>
-  <button
-    class="btn btnblock waves-effect waves-red btn-large"
-    [disabled]="
-      !descriptionProduct ||
-      !descriptionForPublic ||
-      !costPrice ||
-      !productionCost ||
-      !salePrice
-    "
-    (click)="registerProduct()"
-  >
-    Registra Producto
-  </button>
 </div>
