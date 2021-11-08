@@ -1,14 +1,15 @@
+import { SupplieToRegister } from './../../../interfaces/supplies/SupplieToRegister';
+
+import { SupplieService } from './../../services/supplies.service';
 import { Component, OnInit } from '@angular/core';
 
-import { Supplie } from '../../models/supplie';
-import { SupplieService } from '../../services/supplies.service';
-
 @Component({
-  selector: 'app-supplies',
-  templateUrl: './supplies.component.html',
-  styleUrls: ['./supplies.component.css'],
+  selector: 'app-registersupplie',
+  templateUrl: './registersupplie.component.html',
+  styleUrls: ['./registersupplie.component.css']
 })
-export class SuppliesComponent implements OnInit {
+export class RegistersupplieComponent implements OnInit {
+
   description!: string;
   totalPrice!: number;
   quantity!: number;
@@ -20,7 +21,7 @@ export class SuppliesComponent implements OnInit {
 
   async registerSupplie() {
     const unitPrice = parseFloat((this.totalPrice / this.quantity).toFixed(2));
-    const supplie: Supplie = {
+    const supplie: SupplieToRegister = {
       description: this.description,
       unitPrice: unitPrice,
       quantity: this.quantity,
@@ -42,4 +43,5 @@ export class SuppliesComponent implements OnInit {
     this.quantity = 0;
     this.expireDate = new Date();
   }
+
 }

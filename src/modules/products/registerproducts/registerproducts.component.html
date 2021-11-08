@@ -1,0 +1,122 @@
+<div class="example-container">
+  <h2>Registrar Producto</h2>
+  <div class="row">
+      <div class="col">
+        <h3>Ingrese Descripción del producto</h3>
+      <input
+        type="text"
+        name="description"
+        placeholder="Ingrese Descripción"
+        [(ngModel)]="descriptionProduct"
+      />
+    </div>
+  </div>
+  <div class="row">
+ <h2>
+
+   Ingrese Caracteristicas del producto visible para el cliente
+ </h2>
+
+    <input
+      type="text"
+      name="descriptionForClient"
+      placeholder="Ej: 200 g de carne, papas a la francesa + lechuga"
+      [(ngModel)]="descriptionForPublic"
+    />
+  </div>
+ <div>
+
+
+    <div>
+
+
+      <div class="row">
+        <input
+          type="text"
+          placeholder="Selecciona producto"
+          name="producAdd"
+          [(ngModel)]="descriptionSupplie"
+        />
+      </div>
+    </div>
+    <div>
+
+
+      <div class="row">
+        <input
+          type="number"
+          name="costprice"
+          placeholder="Cantidad"
+          [(ngModel)]="quantity"
+        />
+      </div>
+    </div>
+    <div>
+
+
+      <button
+        [disabled]="quantity < 1 || !descriptionSupplie"
+        (click)="registerSupplie()"
+      >
+        +
+      </button>
+    </div>
+  </div>
+  <table>
+    <tr>
+      <td>Insumo</td>
+      <td>Cantidad</td>
+      <td>Precio</td>
+      <td>Eliminar</td>
+    </tr>
+    <tr *ngFor="let supplie of supplies; let i = index">
+      <th>{{ i }} - {{ supplie.description }}</th>
+      <th>{{ supplie.amount }}</th>
+      <th>{{ supplie.price }}</th>
+      <th>
+        <button (click)="deleteSupplie(i, supplie.price)">Eliminar</button>
+      </th>
+    </tr>
+    <tr>
+      <th>
+        <h3>Costo de Materia Prima: {{ costPrice }}</h3>
+      </th>
+    </tr>
+  </table>
+  <div class="row">
+    <h2>
+      Ingrese Costo De producción
+    </h2>
+    <input
+      type="number"
+      name="productioncost"
+      placeholder="Costo De producción"
+      [(ngModel)]="productionCost"
+    />
+  </div>
+  <div class="row">
+    <h2>
+
+      Ingrese Precio De venta
+    </h2>
+    <input
+      type="number"
+      name="salepric"
+      placeholder="Precio De venta"
+      [(ngModel)]="salePrice"
+    />
+  </div>
+  <button
+    class="btn btnblock waves-effect waves-red btn-large"
+    [disabled]="
+      !descriptionProduct ||
+      !descriptionForPublic ||
+      !costPrice ||
+      !productionCost ||
+      !salePrice
+    "
+    (click)="registerProduct()"
+  >
+    Registra Producto
+  </button>
+</div>

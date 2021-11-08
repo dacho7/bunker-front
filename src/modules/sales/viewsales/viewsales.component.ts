@@ -1,13 +1,14 @@
-import { Sale } from '../../models/sale';
+import { SaleToView } from './../../../interfaces/sales/SaleToView';
 import { SaleService } from './../../services/sales.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-sales-list',
-  templateUrl: './sales-list.component.html',
-  styleUrls: ['./sales-list.component.css'],
+  selector: 'app-viewsales',
+  templateUrl: './viewsales.component.html',
+  styleUrls: ['./viewsales.component.css']
 })
-export class SalesListComponent implements OnInit {
+export class ViewsalesComponent implements OnInit {
+
   dateSelect = new Date();
 
   sales: Array<any> = [];
@@ -25,7 +26,7 @@ export class SalesListComponent implements OnInit {
   listSalesForDate() {
     this._salesService.viewSalesfromData(this.dateSelect).subscribe((doc) => {
       doc.forEach((element: any) => {
-        const sale: Sale = {
+        const sale: SaleToView = {
           id: element.payload.doc.id,
           ...element.payload.doc.data(),
         };
@@ -33,4 +34,5 @@ export class SalesListComponent implements OnInit {
       });
     });
   }
+
 }

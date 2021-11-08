@@ -1,32 +1,30 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { SaleComponent } from './components/sale/sale.component'
-import { ProductComponent } from './components/product/product.component';
-import { SuppliesComponent } from './components/supplies/supplies.component';
-import { SalesListComponent } from './components/sales-list/sales-list.component';
-
 const routes: Routes = [
   {
-    path: 'registersale',
-    component: SaleComponent
+    path: 'sales',
+    loadChildren: () =>
+      import('../modules/sales/sales.module').then((m) => m.SalesModule),
   },
   {
-    path: 'registerproduct',
-    component: ProductComponent
+    path: 'products',
+    loadChildren: () =>
+      import('../modules/products/products.module').then(
+        (m) => m.ProductsModule
+      ),
   },
   {
-    path: 'registersupplie',
-    component: SuppliesComponent
-  },
-  {
-    path: 'viewsales',
-    component: SalesListComponent
+    path: 'supplies',
+    loadChildren: () =>
+      import('../modules/supplies/supplies.module').then(
+        (m) => m.SuppliesModule
+      ),
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

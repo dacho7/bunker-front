@@ -1,7 +1,7 @@
+import { SaleToRegister } from './../../interfaces/sales/SaleToRegister';
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Injectable } from '@angular/core';
-import { Sale } from '../models/sale';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +9,7 @@ import { Sale } from '../models/sale';
 export class SaleService {
   constructor(private firestore: AngularFirestore) {}
 
-  saveSale(sale: Sale): Promise<any> {
+  saveSale(sale: SaleToRegister): Promise<any> {
     return this.firestore.collection('sales').add(sale);
   }
 

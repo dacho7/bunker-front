@@ -1,13 +1,14 @@
-import { SaleService } from '../../services/sales.service';
+import { SaleService } from './../../services/sales.service';
+import { SaleToRegister } from './../../../interfaces/sales/SaleToRegister';
 import { Component, OnInit } from '@angular/core';
-import { Sale } from '../../models/sale';
+import { SaleToView } from 'src/interfaces/sales/SaleToView';
 
 @Component({
-  selector: 'app-sale',
-  templateUrl: './sale.component.html',
-  styleUrls: ['./sale.component.css'],
+  selector: 'app-registersales',
+  templateUrl: './registersales.component.html',
+  styleUrls: ['./registersales.component.css'],
 })
-export class SaleComponent implements OnInit {
+export class RegistersalesComponent implements OnInit {
   name!: string;
   product!: string;
   quantity = 1;
@@ -26,7 +27,7 @@ export class SaleComponent implements OnInit {
       this.salesAvailables = [];
       let salesAux: any[] = [];
       doc.forEach((element: any) => {
-        const sale: Sale = {
+        const sale: SaleToView = {
           id: element.payload.doc.id,
           ...element.payload.doc.data(),
         };
@@ -58,7 +59,7 @@ export class SaleComponent implements OnInit {
         this.email = '';
       }
     }
-    const sale: Sale = {
+    const sale: SaleToRegister = {
       client: this.name,
       product: this.product,
       quantity: this.quantity,
