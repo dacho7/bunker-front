@@ -1,7 +1,8 @@
+import { ProductToSale } from './../products/ProductToSale';
 export interface SaleToView {
   id: string;
   client: string;
-  product: string;
+  product: ProductToSale;
   quantity: number;
   payMethod: string; //Efectivo, Nequi, Daviplata
   phone: string;

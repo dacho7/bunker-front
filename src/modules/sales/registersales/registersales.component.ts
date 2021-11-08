@@ -1,3 +1,6 @@
+import { ProductToSale } from './../../../interfaces/products/ProductToSale';
+import { ProductToView } from './../../../interfaces/products/ProductsToView';
+import { ProductService } from './../../services/products.service';
 import { SaleService } from './../../services/sales.service';
 import { SaleToRegister } from './../../../interfaces/sales/SaleToRegister';
 import { Component, OnInit } from '@angular/core';
@@ -10,17 +13,26 @@ import { SaleToView } from 'src/interfaces/sales/SaleToView';
 })
 export class RegistersalesComponent implements OnInit {
   name!: string;
-  product!: string;
+  descriptionProduct = '';
   quantity = 1;
   payMethod = 'Efectivo';
-  phone!: string;
-  address!: string;
-  email!: string;
+  phone = '';
+  address = '';
+  email = '';
   price = 2000;
 
-  salesAvailables: Array<any> = [];
+  productToSale!: ProductToSale;
 
-  constructor(private _saleService: SaleService) {}
+  keyword = 'descriptionProduct';
+
+  salesAvailables: Array<SaleToView> = [];
+
+  allProducts: Array<ProductToView> = [];
+
+  constructor(
+    private _saleService: SaleService,
+    private _productService: ProductService
+  ) {}
 
   ngOnInit(): void {
     this._saleService.lisOnlyNotSend().subscribe((doc) => {
@@ -43,25 +55,24 @@ export class RegistersalesComponent implements OnInit {
         }
       });
     });
+    this._productService.listAllProducts().subscribe((doc: any) => {
+      this.allProducts = [];
+      doc.forEach((product: any) => {
+        this.allProducts.push({
+          id: product.payload.doc.id,
+          ...product.payload.doc.data(),
+        });
+      });
+    });
   }
 
   registerSale() {
     if (!this.validateSale()) {
       return;
-    } else {
-      if (!this.phone) {
-        this.phone = '';
-      }
-      if (!this.address) {
-        this.address = '';
-      }
-      if (!this.email) {
-        this.email = '';
-      }
     }
     const sale: SaleToRegister = {
       client: this.name,
-      product: this.product,
+      product: this.productToSale,
       quantity: this.quantity,
       payMethod: this.payMethod,
       phone: this.phone,
@@ -75,10 +86,26 @@ export class RegistersalesComponent implements OnInit {
       .saveSale(sale)
       .then(() => this.resetFields())
       .catch((e) => console.log(e));
+    console.log(this.salesAvailables);
+  }
+
+  selectEvent(item: any) {
+    this.descriptionProduct = item.description;
+    this.productToSale = {
+      idProduct: item.id,
+      description: item.descriptionProduct,
+      price: item.salePrice,
+      utility: item.utility,
+    };
   }
 
   validateSale() {
-    if (!this.name || !this.product || !this.quantity || !this.address) {
+    if (
+      !this.name ||
+      !this.descriptionProduct ||
+      !this.quantity ||
+      !this.address
+    ) {
       alert('Digite todos los campos');
       return false;
     }
@@ -104,7 +131,7 @@ export class RegistersalesComponent implements OnInit {
 
   resetFields() {
     this.name = '';
-    this.product = '';
+    this.descriptionProduct = '';
     this.quantity = 1;
     this.phone = '';
     this.address = '';

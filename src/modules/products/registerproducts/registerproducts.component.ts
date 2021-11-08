@@ -15,13 +15,15 @@ import { FormControl } from '@angular/forms';
 export class RegisterproductsComponent implements OnInit {
   descriptionProduct!: string;
   descriptionForPublic = '';
-  descriptionSupplie = '';
+  descriptionSupplie = ''; //don't use
+  idSupplie = '';
   costPrice = 0;
   productionCost!: number;
   salePrice: number = 0;
   allSupplies: Array<SupplieToView> = [];
   quantity = 0;
   id = '';
+  keyword = 'description';
 
   supplies: Array<SupplieForProduct> = [];
 
@@ -66,12 +68,14 @@ export class RegisterproductsComponent implements OnInit {
       .catch((err) => console.log(err));
   }
 
+  selectEvent(item: any) {
+    this.idSupplie = item.id;
+  }
+
   registerSupplie() {
-    if (!this.quantity) {
-      this.quantity = 1;
-    }
+    console.log('registe: ', this.idSupplie);
     this.allSupplies.forEach((supp) => {
-      if (this.descriptionSupplie == supp.description) {
+      if (this.idSupplie == supp.id) {
         this.supplies.push({
           id: supp.id,
           description: supp.description,
@@ -80,6 +84,7 @@ export class RegisterproductsComponent implements OnInit {
         });
         this.costPrice += this.quantity * supp.unitPrice;
         this.quantity = 0;
+        this.idSupplie = '';
         this.descriptionSupplie = '';
       }
     });

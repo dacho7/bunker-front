@@ -5,13 +5,13 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-viewsales',
   templateUrl: './viewsales.component.html',
-  styleUrls: ['./viewsales.component.css']
+  styleUrls: ['./viewsales.component.css'],
 })
 export class ViewsalesComponent implements OnInit {
-
   dateSelect = new Date();
-
-  sales: Array<any> = [];
+  total = 0;
+  totalEfecty = 0;
+  sales: Array<SaleToView> = [];
 
   constructor(private _salesService: SaleService) {
     //const data = new Date()
@@ -31,8 +31,11 @@ export class ViewsalesComponent implements OnInit {
           ...element.payload.doc.data(),
         };
         this.sales.push(sale);
+        this.total += element.payload.doc.data().product.price;
+        if (element.payload.doc.data().payMethod == 'Efectivo') {
+          this.totalEfecty += element.payload.doc.data().product.price;
+        }
       });
     });
   }
-
 }

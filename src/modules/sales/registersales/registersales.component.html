@@ -19,8 +19,27 @@
       </div>
 
       <div class="col">
-        <h6>Ingrese Producto<span class="oblig">*</span></h6>
-        <input type="text" [(ngModel)]="product" />
+        <h6>
+          Ingrese Producto
+          <span class="oblig">*</span>
+        </h6>
+        <ng-autocomplete
+          [data]="allProducts"
+          [searchKeyword]="keyword"
+          [itemTemplate]="itemTemplate"
+          [notFoundTemplate]="notFoundTemplate"
+          (selected)="selectEvent($event)"
+          [(ngModel)]="descriptionProduct"
+        >
+        </ng-autocomplete>
+
+        <ng-template #itemTemplate let-item>
+          <a [innerHTML]="item.descriptionProduct"></a>
+        </ng-template>
+
+        <ng-template #notFoundTemplate let-notFound>
+          <div [innerHTML]="notFound"></div>
+        </ng-template>
       </div>
 
       <div class="col">
@@ -87,7 +106,9 @@
       <button
         class="btn btnblock waves-effect waves-red btn-large"
         (click)="registerSale()"
-        [disabled]="!name || !product || !quantity || !address || !payMethod"
+        [disabled]="
+          !name || !descriptionProduct || !quantity || !address || !payMethod
+        "
       >
         Registrar Venta
       </button>
@@ -104,8 +125,9 @@
           <th>Número de celular</th>
           <th>Envar Domicilio</th>
         </tr>
+
         <tr *ngFor="let item of salesAvailables">
-          <td>{{ item.product }}</td>
+          <td>{{ item.product.description }}</td>
           <td>{{ item.address }}</td>
           <td>{{ item.client }}</td>
           <td>{{ item.phone }}</td>

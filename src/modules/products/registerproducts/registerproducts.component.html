@@ -25,40 +25,29 @@
     </div>
 
     <div class="row">
-      <div class="row">
-        <div class="col s12">
-          <div class="row">
-            <div class="input-field col s12">
-              <input
-                *ngFor="let item of allSupplies"
-                type="text"
-                id="autocomplete-input"
-                class="autocomplete"
-                value="12"
-              />
-              <label for="autocomplete-input">Autocomplete</label>
-            </div>
-          </div>
-        </div>
-      </div>
-      <script>
-        const val = document.getElementById("autocomplete-input");
-        console.log(val);
-      </script>
-      >
-      <!-- <div class="col s4">
+      <div class="col s4">
         <div>
           <h6>Ingrese Producto</h6>
         </div>
-        <div>
-          <input
-            type="text"
-            placeholder="Selecciona producto"
-            name="producAdd"
+        <div class="ng-autocomplete inputt">
+          <ng-autocomplete
+            [data]="allSupplies"
+            [searchKeyword]="keyword"
+            [itemTemplate]="itemTemplate"
+            [notFoundTemplate]="notFoundTemplate"
+            (selected)="selectEvent($event)"
             [(ngModel)]="descriptionSupplie"
-          />
-        </div>
+          >
+          </ng-autocomplete>
 
+          <ng-template #itemTemplate let-item>
+            <a [innerHTML]="item.description"></a>
+          </ng-template>
+
+          <ng-template #notFoundTemplate let-notFound>
+            <div [innerHTML]="notFound"></div>
+          </ng-template>
+        </div>
       </div>
       <div class="col s4">
         <div><h6>Ingrese Cantidad</h6></div>
@@ -74,12 +63,12 @@
       <div class="col s4">
         <div><h6>Agregar</h6></div>
         <button
-          [disabled]="quantity < 1 || !descriptionSupplie"
+          [disabled]="quantity < 1 || !idSupplie"
           (click)="registerSupplie()"
         >
           +
         </button>
-      </div> -->
+      </div>
     </div>
     <table>
       <tr>

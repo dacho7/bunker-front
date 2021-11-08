@@ -14,23 +14,21 @@
           <tr>
             <th>Cliente</th>
             <th>Producto</th>
-            <th>Precio</th>
             <th>Direccion</th>
             <th>Tipo de Pago</th>
             <th>Total</th>
           </tr>
           <tr *ngFor="let item of sales">
             <td>{{ item.client }}</td>
-            <td>{{ item.product }}</td>
-            <td>{{ item.product }}</td>
+            <td>{{ item.product.description }}</td>
             <td>{{ item.address }}</td>
-            <td>{{ item.methodPay }}</td>
-            <td>{{ item.product }}</td>
+            <td>{{ item.payMethod }}</td>
+            <td>{{ item.product.price }}</td>
           </tr>
         </table>
         <div>
-          <h4>Total Venta del dia:</h4>
-          <h5>Total Efectivo:</h5>
+          <h5>Total Venta del dia: {{ total }}</h5>
+          <h6>Total Efectivo: {{ totalEfecty }}</h6>
         </div>
       </div>
     </div>
