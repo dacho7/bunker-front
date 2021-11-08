@@ -5,17 +5,21 @@ const routes: Routes = [
   {
     path: 'sales',
     loadChildren: () =>
-      import('./sales/sales.module').then((m) => m.SalesModule),
+      import('../modules/sales/sales.module').then((m) => m.SalesModule),
   },
   {
     path: 'products',
     loadChildren: () =>
-      import('./products/products.module').then((m) => m.ProductsModule),
+      import('../modules/products/products.module').then(
+        (m) => m.ProductsModule
+      ),
   },
   {
     path: 'supplies',
     loadChildren: () =>
-      import('./supplies/supplies.module').then((m) => m.SuppliesModule),
+      import('../modules/supplies/supplies.module').then(
+        (m) => m.SuppliesModule
+      ),
   },
 ];
 
