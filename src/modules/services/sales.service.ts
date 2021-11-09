@@ -37,13 +37,8 @@ export class SaleService {
   }
 
   viewSalesfromData(date: Date) {
-    const det2 = new Date('2021-10-31');
-    const det = new Date('2021-11-1');
-    let start = new Date('2017-01-01');
-    console.log(start.getTime());
-
     return this.firestore
-      .collection('sales', (ref) => ref.where('dateCreated', '>', det2))
+      .collection('sales', (ref) => ref.where('dateCreated', '<', new Date()))
       .snapshotChanges();
   }
 
