@@ -2,6 +2,7 @@ import { SaleToRegister } from './../../interfaces/sales/SaleToRegister';
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Injectable } from '@angular/core';
+import { DatePipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
@@ -29,11 +30,10 @@ export class SaleService {
     //return this.firestore.collection('sales').snapshotChanges();
   }
 
-  listByDate(): Observable<any> {
-    console.log(new Date(2021, 10, 8));
+  listByDate(dat1: Date, dat2: Date): Observable<any> {
     return this.firestore
       .collection('sales', (ref) =>
-        ref.where('dateCreated', '==', new Date(2021, 10, 8))
+        ref.where('dateCreated', '<=', dat1).where('dateCreated', '>=', dat2)
       )
       .snapshotChanges();
   }
