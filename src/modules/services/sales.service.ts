@@ -29,6 +29,15 @@ export class SaleService {
     //return this.firestore.collection('sales').snapshotChanges();
   }
 
+  listByDate(): Observable<any> {
+    console.log(new Date(2021, 10, 8));
+    return this.firestore
+      .collection('sales', (ref) =>
+        ref.where('dateCreated', '==', new Date(2021, 10, 8))
+      )
+      .snapshotChanges();
+  }
+
   sendOrder(id: string): Promise<any> {
     return this.firestore
       .collection('sales')

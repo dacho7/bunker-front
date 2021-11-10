@@ -9,5 +9,5 @@ export interface SaleToRegister {
   address: string;
   email: string;
   state: string; //"En preparacion(default), En Espera, Cancelado, Enviado(esta pago), Fiado"
-  dateCreated: Date;
+  dateCreated: string;
 }

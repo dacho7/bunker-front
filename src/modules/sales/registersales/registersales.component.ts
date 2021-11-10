@@ -70,6 +70,10 @@ export class RegistersalesComponent implements OnInit {
     if (!this.validateSale()) {
       return;
     }
+    const dat = new Date();
+    const date = `${dat.getDate()}-${
+      dat.getMonth() + 1
+    }-${dat.getFullYear()} ${dat.getHours()}:${dat.getMinutes()}`;
     const sale: SaleToRegister = {
       client: this.name,
       product: this.productToSale,
@@ -79,7 +83,7 @@ export class RegistersalesComponent implements OnInit {
       address: this.address,
       email: this.email,
       state: 'en preparacion',
-      dateCreated: new Date(),
+      dateCreated: date,
       price: this.price,
     };
     this._saleService
