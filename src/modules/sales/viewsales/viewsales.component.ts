@@ -24,7 +24,7 @@ export class ViewsalesComponent implements OnInit {
   listAllSales() {}
 
   listSalesForDate() {
-    this._salesService.viewSalesfromData(this.dateSelect).subscribe((doc) => {
+    this._salesService.listByDate().subscribe((doc) => {
       doc.forEach((element: any) => {
         const sale: SaleToView = {
           id: element.payload.doc.id,
