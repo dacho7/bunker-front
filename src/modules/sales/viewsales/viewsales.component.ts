@@ -12,9 +12,12 @@ export class ViewsalesComponent implements OnInit {
   total = 0;
   totalEfecty = 0;
   sales: Array<SaleToView> = [];
+  dateActual: string;
 
   constructor(private _salesService: SaleService) {
     this.listSalesForDate();
+    const dte = new Date();
+    this.dateActual = dte.toLocaleString();
   }
 
   ngOnInit(): void {}

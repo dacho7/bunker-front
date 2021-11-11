@@ -14,7 +14,8 @@
         Ver Ventas del día seleccionado
       </button>
       <div class="s12">
-        <h5 class="left-align">Ventas Día Actual</h5>
+        <h5 *ngIf="!dateSelect">Total Venta del dia {{ dateActual }}</h5>
+        <h5 *ngIf="dateSelect">Total Venta del dia {{ dateSelect }}</h5>
         <table>
           <tr>
             <th>Cliente</th>

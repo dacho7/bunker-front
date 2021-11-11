@@ -2,7 +2,6 @@ import { SaleToRegister } from './../../interfaces/sales/SaleToRegister';
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Injectable } from '@angular/core';
-import { DatePipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
@@ -45,8 +44,6 @@ export class SaleService {
       date1.getMonth(),
       date1.getDate() - 1
     );
-    console.log(date1);
-    console.log(date2);
 
     return this.firestore
       .collection('sales', (ref) =>
