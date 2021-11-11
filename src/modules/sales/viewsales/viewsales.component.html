@@ -6,10 +6,15 @@
   <div class="row center-align">
     <div class="col s12">
       <input type="date" name="date" id="date" [(ngModel)]="dateSelect" />
-      <button class="btn btnblock waves-effect waves-red">Ver Ventas</button>
-      <div></div>
-
+      <button
+        (click)="findSalesForDay()"
+        [disabled]="!dateSelect"
+        class="btn btnblock waves-effect waves-red"
+      >
+        Ver Ventas del día seleccionado
+      </button>
       <div class="s12">
+        <h5 class="left-align">Ventas Día Actual</h5>
         <table>
           <tr>
             <th>Cliente</th>
