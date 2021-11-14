@@ -26,6 +26,13 @@ const routes: Routes = [
         (m) => m.SuppliesModule
       ),
   },
+  {
+    path: 'administration',
+    loadChildren: () =>
+      import('../modules/contability/contability.module').then(
+        (m) => m.ContabilityModule
+      ),
+  },
 ];
 
 @NgModule({
